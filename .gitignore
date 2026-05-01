@@ -22,3 +22,5 @@ yarn-error.log*
 # Editor settings (optional — some teams commit these)
 .vscode/
 .idea/
+
+# These were suggested by Claude. Thanks, Claude! Hopefully your help with this file doesn't break everything! teehee
