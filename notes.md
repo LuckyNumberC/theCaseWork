@@ -1,12 +1,29 @@
 _____
 Notes
 
-* System should probably stop user from creating a skeleton invoice that has no data or should give notice of no data. Though users/clients may need a blank invoice for documentation...
+* System should probably stop user from creating a skeleton invoice that has no data or should give an alert of no data. Though users/clients may need a blank invoice for documentation...
 * System should notify of duplicate invoices and updated invoices for same-date invoice creation.
 * System should show the time an invoice was created to more easily differentiate invoices created on the same day.
 * System should check for impossible/unlikely hours before generating an invoice.
 * System should not allow Due Date to be a date that is before the date of Invoice Date.
 * System should prevent unrealistic numbers as input for a user's expected hours per day in Account Settings > Users.
+* Billing Period dropdown should only show the months that the case has been open. Currently shows the last six months.
+* Clicking the Insights tab of a case with status "new" results in a blank page with no way to go back. Even pushing the browser's back button doesn't load the previous pages, yet the URL changes to the previous pages.
+* Creating a case: I have filled in everything and I don't know why I'm not allowed to click the Create button.
+* Feature Request: ability to view multiple tabs of a case side by side
+* Feature Request: collapse the blue sidebar
+* Feature Request: Notes should include a case history as well as general notes. As a user, I don't want to wade through small notes to find things that I need to know whenever I look back at the case. This would be a great application of the Ai copilot where you could just ask for the info you need
+* Feature Request: Search function for adding affiliated parties during case creation. Same with Assigned To and Retained By.
+* Feature Request: Cases are set up like binders with clear sections inside and that's good. Unlike a binder, there's no place for sticky notes with the type of info that needs to be remembered upon opening a case.
+* Feature Request/Recommendation: Info from Milestones, Tasks, Events, Notes and Insights could be condensed into "Timeline" (or Case Progress) where all this info appears on a clear, scrollable visual of the case's history and intended progress.
+    This would allow users to assume the progress of a case in multiple ways but all at once.
+    There would be a length of blocks to represents hours logged by employees.
+    There would be pins to point out things that happened and will happen:
+        When documents were added and invoices paid.
+        Notes could be attached to certain objects/events on the timeline.
+        Tasks started, but uncompleted.
+Feature Request/Recommendation: Drop the 'the'. Just CaseWork. It's cleaner.
+
 * Bugs submitted:
     * System replaces an invoice with a new invoice created using the same invoice number as the old one. Even paid invoices are replaced. (Paid invoices shouldn't be allowed to be deleted.) (Out of scope for capstone project.)
 
@@ -20,7 +37,7 @@ CASES > any case > INVOICES > CREATE INVOICE > CREATE NEW INVOICE >
             Accepts custom input.
             Re-generate button generates a different invoice number with each click.
             User input is added to new invoice.
-            Required field notice appears upon erasure of invoice number.
+            Required field alert appears upon erasure of invoice number.
             Create Invoice button is unclickable while Invoice Number field is empty.
         Invoice Date:
             Pre-populates with today's date.
@@ -60,7 +77,7 @@ Test Cases
 
 INVOICE NUMBER
 
-*   Pre-populates with a different generated number
+*   Pre-populates with a different generated number on each visit
         Description:
             Verifies each visit to the Create Invoice form generates a fresh number rather than using the same one.
         Preconditions:
@@ -72,7 +89,7 @@ INVOICE NUMBER
         Expected Test Step Results:
             Upon a second visit, the last three digits in Invoice Number are different from the digits in the first visit.
 
-*   Pre-populates with a set string pattern (INV-date-###)
+* M Pre-populates with a set string pattern (INV-date-###)
         Description:
             Verifies the Invoice Number field is pre-filled with the intended string pattern. The pattern includes the letters "INV" followed by a hyphen and the current day's date in basic ISO 8601 format, then another hyphen followed by three digits.
         Preconditions:
@@ -86,7 +103,7 @@ INVOICE NUMBER
         Expected Test Step Results:
             The Invoice Number field is pre-populated with the pattern: INV-date-###.
 
-*   Accepts custom input
+*   Receives custom input
         Description:
             Verifies the Invoice Number field can be customized.
         Preconditions:
@@ -96,15 +113,15 @@ INVOICE NUMBER
         Expected Test Steps Results:
             The Invoice Number field receives custom input.
 
-*   Notice appears upon typing more than 50 characters
+*   Alert appears upon typing more than 50 characters
         Description:
-            Verifies the "Max 50 characters" notice appears upon input of more than 50 characters into the Invoice Number field.
+            Verifies the "Max 50 characters" alert appears upon input of more than 50 characters into the Invoice Number field.
         Preconditions:
             User is logged in with all Invoices permissions and has navigated through Cases > any case > Invoices > Create Invoice.
         Test Steps:
             1. Type more than 50 characters into the Invoice Number field.
         Expected Test Steps Results:
-            A notice appears: "50 max characters."
+            An alert appears: "50 max characters."
 
 *   Re-generate button generates a different invoice number with each click
         Description:
@@ -114,22 +131,22 @@ INVOICE NUMBER
         Test Steps:
             1. Note the current invoice number.
             2. Click the Re-Generate button.
-            3. Note the new invoice number
-            4. Verify the new invoice number differs from the previous one.
+            3. Verify the new invoice number differs from previous.
+            4. Note the new invoice number
             5. Click the Re-Generate button.
-            6. Verify the new invoice number differs from both previous ones.
+            6. Verify the new invoice number differs from both previous numbers.
         Expected Test Steps Results:
             Contents of the Invoice Number field are replaced by a different invoice number with each click.
 
-*    Required field notice appears upon erasure
+*    Required field alert appears upon erasure
         Description:
-            Verifies the "Invoice Number is a required field." notice appears upon emptying the Invoice Number field.
+            Verifies the "Invoice Number is a required field." alert appears upon emptying the Invoice Number field.
         Preconditions:
             User is logged in with all Invoices permissions and has navigated through Cases > any case > Invoices > Create Invoice.
         Test Steps:
             1. Erase all characters from the Invoice Number field.
         Expected Test Steps Results:
-            A notice appears: "Invoice Number is a required field."
+            An alert appears: "Invoice Number is a required field."
 
 *   Placeholder "Enter invoice number" appears in field when empty
         Description:
