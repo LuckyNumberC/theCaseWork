@@ -45,6 +45,7 @@ class CreateInvoicePage extends Base {
         await this.fieldInvoiceNumber.click();
         await browser.keys(['Meta', 'a']);
         await browser.keys('Backspace');
+        await expect (this.fieldInvoiceNumber).toHaveValue('');
     }
 
     async fillInvoiceNumber (count) {
