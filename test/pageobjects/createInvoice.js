@@ -1,8 +1,11 @@
-import { $, browser } from '@wdio/globals';
-import Base from './pageBase.js';
-import LoginPage from '../pageobjects/pageLogin.js';
+import { $, browser, expect } from '@wdio/globals';
+import Base from './base.js';
+import sideBar from './sideBar.js'
+import CaseList from './caseList.js';
+import Case from './case.js';
+import CaseInvoices from './caseInvoices.js';
 
-class CreateInvoicePage extends Base {
+class CreateInvoice extends Base {
 
     //// Invoice Info ////
 
@@ -34,10 +37,17 @@ class CreateInvoicePage extends Base {
         return this._lastFilledValue
     }
 
-    async navForInvoiceNumberChange () {
+    async navThere () {
+        await sideBar.startCases();
+        await CaseList.startTopCase();
+        await Case.startInvoices();
+        await CaseInvoices.startCreateInvoice();
+    }
+
+    async changeInvoiceNumberByNav () {
         this.initialValue = await this.fieldInvoiceNumber.getValue();
-        await LoginPage.tabInvoices.click();
-        await LoginPage.tabCreateInvoice.click();
+        await Case.startInvoices();
+        await CaseInvoices.startCreateInvoice();
         this.newValue = await this.fieldInvoiceNumber.getValue();
     }
 
@@ -45,7 +55,7 @@ class CreateInvoicePage extends Base {
         await this.fieldInvoiceNumber.click();
         await browser.keys(['Meta', 'a']);
         await browser.keys('Backspace');
-        await expect (this.fieldInvoiceNumber).toHaveValue('');
+        await expect(this.fieldInvoiceNumber).toHaveValue('');
     }
 
     async fillInvoiceNumber (count) {
@@ -68,16 +78,14 @@ class CreateInvoicePage extends Base {
         return $('[data-testid="create-invoice-billing-period-dropdown"]');
     }
 
+    get optionCustom () {
+        return $('[data-testid="create-invoice-billing-period-option-custom"]');
+    }
 
-
-        get optionCustom () {
-            return $('[data-testid="create-invoice-billing-period-option-custom"]');
-        }
-    
     get visualBillingPeriod () {
         return $('//span[text()="Billing Period:"]');
     }
-    
+
     get fieldBillingPeriodStart () {
         return $('[data-testid="create-invoice-billing-period-start-picker"]');
     }
@@ -90,25 +98,25 @@ class CreateInvoicePage extends Base {
         return $('[data-testid="create-invoice-payment-terms-dropdown"]');
     }
 
-        get optionNet30 () {
-            return $('[data-testid="create-invoice-payment-terms-option-Net 30"]');
-        }
+    get optionNet30 () {
+        return $('[data-testid="create-invoice-payment-terms-option-Net 30"]');
+    }
 
-        get optionNet60 () {
-            return $('[data-testid="create-invoice-payment-terms-option-Net 60"]');
-        }
+    get optionNet60 () {
+        return $('[data-testid="create-invoice-payment-terms-option-Net 60"]');
+    }
 
-        get optionNet90 () {
-            return $('[data-testid="create-invoice-payment-terms-option-Net 90"]');
-        }
+    get optionNet90 () {
+        return $('[data-testid="create-invoice-payment-terms-option-Net 90"]');
+    }
 
-        get optionUponReceipt () {
-            return $('[data-testid="create-invoice-payment-terms-option-Upon Receipt"]');
-        }
+    get optionUponReceipt () {
+        return $('[data-testid="create-invoice-payment-terms-option-Upon Receipt"]');
+    }
 
-        get optionPaymentTermsCustom () {
-            return $('[data-testid="create-invoice-payment-terms-option-Custom"]');
-        }
+    get optionPaymentTermsCustom () {
+        return $('[data-testid="create-invoice-payment-terms-option-Custom"]');
+    }
 
     get visualDueDate () {
         return $('//label[normalize-space(text())="Due Date"]/following-sibling::span');
@@ -120,4 +128,4 @@ class CreateInvoicePage extends Base {
 
 }
 
-export default new CreateInvoicePage();
+export default new CreateInvoice();

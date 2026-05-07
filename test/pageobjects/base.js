@@ -2,7 +2,7 @@ import { browser } from '@wdio/globals';
 
 export default class Base {
 
-    open () {
+    startChrome () {
         return browser.url('/');
     }
 
