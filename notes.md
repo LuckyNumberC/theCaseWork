@@ -228,14 +228,15 @@ BILLING PERIOD
             User is logged in with all Invoices permissions and has navigated through Cases > any case > Invoices > Create Invoice.
         Test Steps:
             1. Click the Billing Period field.
-            2. Verify the dropdown lists the current month and the six prior months in chronological order.
-            3. Verify the current month is labeled "This Month".
-            4. Verify the previous month is labeled "Last Month".
-            5. Verify the dropdown includes a "Custom" option below the months.
+            2. Verify the number of options.
+            3. Verify the dropdown lists the current month and the six prior months in chronological order.
+            4. Verify the current month is labeled "This Month".
+            5. Verify the previous month is labeled "Last Month".
+            6. Verify the dropdown includes a "Custom" option below the months.
         Expected Test Steps Results:
             The Billing Period dropdown lists seven recent months (current month labeled "This Month", previous month labeled "Last Month") followed by "Custom".
 
-*   Displays chosen option as the billing period
+*   Displays the chosen option as the billing period
         Description:
             Verifies the chosen month from the Billing Period dropdown appears next to the "Billing Period:" label on the right side of the form.
         Preconditions:

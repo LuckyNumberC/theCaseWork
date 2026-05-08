@@ -78,9 +78,21 @@ class CreateInvoice extends Base {
         return $('[data-testid="create-invoice-billing-period-dropdown"]');
     }
 
-    get optionCustom () {
-        return $('[data-testid="create-invoice-billing-period-option-custom"]');
+    get optionsBillingPeriod () {
+        return $$('[data-testid^="create-invoice-billing-period-option-"]')
     }
+
+        get optionLastMonth () {
+            return $('*=(Last Month)');
+        }
+
+        get optionThisMonth () {
+            return $('*=(This Month)');
+        }
+
+        get optionCustom () {
+            return $('[data-testid="create-invoice-billing-period-option-custom"]');
+        }
 
     get visualBillingPeriod () {
         return $('//span[text()="Billing Period:"]');
@@ -124,6 +136,16 @@ class CreateInvoice extends Base {
 
     get fieldDueDateCustom () {
         return $('[data-testid="create-invoice-due-date-picker"]');
+    }
+
+    // For checking each option under Billing Period dropdown, I think I need to:
+    // array of 8 strings to check each option button
+    // make a loop (what kind?)
+    // make sure the selectors are good and whatever... oh wait, I don't have them.
+    // 
+
+    async listBillingPeriodOptions () {
+        
     }
 
 }
