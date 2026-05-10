@@ -51,9 +51,17 @@ class CreateInvoice extends Base {
         this.newValue = await this.fieldInvoiceNumber.getValue();
     }
 
+    // async clearInvoiceNumber () {
+    //     await this.fieldInvoiceNumber.click();
+    //     await browser.keys(['Meta', 'a']);
+    //     await browser.keys('Backspace');
+    //     await expect(this.fieldInvoiceNumber).toHaveValue('');
+    // }
+
     async clearInvoiceNumber () {
         await this.fieldInvoiceNumber.click();
-        await browser.keys(['Meta', 'a']);
+        const modSelectAll = process.platform === 'darwin' ? 'Meta' : 'Control';
+        await browser.keys([modSelectAll, 'a']);
         await browser.keys('Backspace');
         await expect(this.fieldInvoiceNumber).toHaveValue('');
     }
@@ -82,44 +90,44 @@ class CreateInvoice extends Base {
         return $$('[data-testid^="create-invoice-billing-period-option-"]')
     }
 
-        get optionLastMonth () {
-            return $('*=(Last Month)');
-        }
+    get optionLastMonth () {
+        return $('*=(Last Month)');
+    }
 
-        get optionThisMonth () {
-            return $('*=(This Month)');
-        }
+    get optionThisMonth () {
+        return $('*=(This Month)');
+    }
 
-        get optionCustom () {
-            return $('[data-testid="create-invoice-billing-period-option-custom"]');
-        }
+    get optionCustom () {
+        return $('[data-testid="create-invoice-billing-period-option-custom"]');
+    }
 
     get visualBillingPeriod () {
         return $('//span[text()="Billing Period:"]');
     }
 
-    get fieldBillingPeriodStart () {
+    get calendarBillingPeriodStart () {
         return $('[data-testid="create-invoice-billing-period-start-picker"]');
     }
 
-    get fieldBillingPeriodEnd () {
+    get calendarBillingPeriodEnd () {
         return $('[data-testid="create-invoice-billing-period-end-picker"]');
+    }
+
+    get calendarNextMonth () {
+        return $('[title^="Go to next month"]');
+    }
+
+    get calendarFirstDay () {
+        return $('[span="1"]');
     }
 
     get dropdownPaymentTerms () {
         return $('[data-testid="create-invoice-payment-terms-dropdown"]');
     }
 
-    get optionNet30 () {
-        return $('[data-testid="create-invoice-payment-terms-option-Net 30"]');
-    }
-
-    get optionNet60 () {
-        return $('[data-testid="create-invoice-payment-terms-option-Net 60"]');
-    }
-
-    get optionNet90 () {
-        return $('[data-testid="create-invoice-payment-terms-option-Net 90"]');
+    get optionsNet () {
+        return $('[data-testid^="create-invoice-payment-terms-option-Net "]');
     }
 
     get optionUponReceipt () {
@@ -138,14 +146,15 @@ class CreateInvoice extends Base {
         return $('[data-testid="create-invoice-due-date-picker"]');
     }
 
-    // For checking each option under Billing Period dropdown, I think I need to:
-    // array of 8 strings to check each option button
-    // make a loop (what kind?)
-    // make sure the selectors are good and whatever... oh wait, I don't have them.
-    // 
+    async startBillingPeriodCustom () {
+        await this.dropdownBillingPeriod.click();
+        await this.optionCustom.click();
+    }
 
-    async listBillingPeriodOptions () {
-        
+    async startBillingPeriodStartCalendar () {
+        await this.calendarBillingPeriodStart.click();
+        await this.calendarNextMonth.click();
+
     }
 
 }

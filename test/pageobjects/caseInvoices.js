@@ -4,7 +4,7 @@ import Base from './base.js';
 class CaseInvoices extends Base {
 
     get tabCreateInvoice () {
-        return $('[data-testid="case-invoices-create-invoice-tab"]');
+        return $('[data-testid="tab-case-invoices-createInvoice"]');
     }
 
     async startCreateInvoice () {

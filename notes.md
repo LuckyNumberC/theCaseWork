@@ -5,9 +5,10 @@ Notes
 * System should notify of duplicate invoices and updated invoices for same-date invoice creation.
 * System should show the time an invoice was created to more easily differentiate invoices created on the same day.
 * System should check for impossible/unlikely hours before generating an invoice.
-* System should not allow Due Date to be a date that is before the date of Invoice Date.
+* System should not allow Invoice Due Date to be a date that is before the date of Invoice Date.
 * System should prevent unrealistic numbers as input for a user's expected hours per day in Account Settings > Users.
 * Billing Period dropdown should only show the months that the case has been open. Currently shows the last six months.
+* Billing Period End date should not be able to be before Billing Period Start date.
 * Clicking the Insights tab of a case with status "new" results in a blank page with no way to go back. Even pushing the browser's back button doesn't load the previous pages, yet the URL changes to the previous pages.
 * Creating a case: I have filled in everything and I don't know why I'm not allowed to click the Create button.
 * Feature Request: ability to view multiple tabs of a case side by side
@@ -257,6 +258,7 @@ BILLING PERIOD
             1. Click the Billing Period field.
             2. Click the Custom option.
             3. Verify the Billing Period Start and Billing Period End fields appear.
+            (I stopped here because we need to make sure the calendar dropdowns appear, but we should probably verify that choosing a date from the calendars gives the dates... except we're not checking what's on the completed invoice. Whatever input is on the calendar field is likely not going to break or be different.)
             4. Click the Billing Period Start field.
             5. Click a date from the calendar.
             6. Verify the chosen date is in the Billing Period Start field.
@@ -264,7 +266,8 @@ BILLING PERIOD
             8. Click a date from the calendar.
             9. Verify the chosen date is in the Billing Period End field.
         Expected Test Steps Results:
-            The Custom option shows Billing Period Start and End fields where inputs can be made from their calendar dropdowns.
+            The Custom option shows two calendar dropdowns for inputting custom start and end dates for the Billing Period.
+            // The Custom option shows Billing Period Start and End fields where inputs can be made from their calendar dropdowns.
 
 
 PAYMENT TERMS
